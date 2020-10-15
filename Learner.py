@@ -75,14 +75,16 @@ class face_learner(object):
                 ('optimizer_{}_accuracy:{}_step:{}_{}.pth'.format(get_time(), accuracy, self.step, extra)))
     
     def load_state(self, conf, fixed_str, from_save_folder=False, model_only=False):
-        if from_save_folder:
-            save_path = conf.save_path
-        else:
-            save_path = conf.model_path            
-        self.model.load_state_dict(torch.load(save_path/'model_{}'.format(fixed_str)))
-        if not model_only:
-            self.head.load_state_dict(torch.load(save_path/'head_{}'.format(fixed_str)))
-            self.optimizer.load_state_dict(torch.load(save_path/'optimizer_{}'.format(fixed_str)))
+#         if from_save_folder:
+#             save_path = conf.save_path
+#         else:
+#             save_path = conf.model_path            
+#         self.model.load_state_dict(torch.load(save_path/'model_{}'.format(fixed_str)))
+#         if not model_only:
+#             self.head.load_state_dict(torch.load(save_path/'head_{}'.format(fixed_str)))
+#             self.optimizer.load_state_dict(torch.load(save_path/'optimizer_{}'.format(fixed_str)))
+        self.model.load_state_dict(torch.load(conf.model_path))
+        
         
     def board_val(self, db_name, accuracy, best_threshold, roc_curve_tensor):
         self.writer.add_scalar('{}_accuracy'.format(db_name), accuracy, self.step)

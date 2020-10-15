@@ -8,9 +8,11 @@ from mtcnn_pytorch.src.first_stage import run_first_stage
 from mtcnn_pytorch.src.align_trans import get_reference_facial_points, warp_and_crop_face
 device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
 # device = 'cpu'
+import torch.nn as nn
 
-class MTCNN():
+class MTCNN(nn.Module):
     def __init__(self):
+        super().__init__()
         self.pnet = PNet().to(device)
         self.rnet = RNet().to(device)
         self.onet = ONet().to(device)
